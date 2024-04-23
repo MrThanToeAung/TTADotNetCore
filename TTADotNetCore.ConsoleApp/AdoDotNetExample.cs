@@ -111,24 +111,6 @@ namespace TTADotNetCore.ConsoleApp
 
         }
 
-        public void Edit(int id, string title, string author, string content)
-        {
-            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
-            connection.Open();
-            string query = @"UPDATE [dbo].[Tbl_Blog]
-                           SET [BlogTitle] = @BlogTitle
-                              ,[BlogAuthor] = @BlogAuthor
-                              ,[BlogContent] = @BlogContent
-                         WHERE BlogID = @BlogID";
-
-            SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@BlogID", id);
-            cmd.Parameters.AddWithValue("@BlogTitle", title);
-            cmd.Parameters.AddWithValue("@BlogAuthor", author);
-            cmd.Parameters.AddWithValue("@BlogContent", content);
-
-        }
-
         public void Edit(int id)
         {
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
