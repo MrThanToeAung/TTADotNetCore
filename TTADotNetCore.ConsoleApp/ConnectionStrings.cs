@@ -13,7 +13,8 @@ namespace TTADotNetCore.ConsoleApp
             DataSource = "HP",
             InitialCatalog = "TTADotNetCore",
             UserID = "sa",
-            Password = "sa@123"
+            Password = "sa@123",
+            TrustServerCertificate = true            
         };
     }
 }
