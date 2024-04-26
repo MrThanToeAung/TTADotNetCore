@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TTADotNetCore.ConsoleApp.Dtos;
 
-namespace TTADotNetCore.ConsoleApp
+namespace TTADotNetCore.ConsoleApp.EFCoreExamples
 {
     internal class EFCoreExample
     {
@@ -16,11 +17,11 @@ namespace TTADotNetCore.ConsoleApp
             //Edit(100);
             //Create("TTA", "TTA", "TTA");
             //Update(200, "NLM", "NLM", "NLM");
-            Delete(1005);   
+            Delete(1005);
         }
 
         private void Read()
-        {            
+        {
             var dataList = db.Blogs.ToList();
 
             foreach (BlogDto item in dataList)
@@ -35,9 +36,9 @@ namespace TTADotNetCore.ConsoleApp
 
         private void Edit(int id)
         {
-            var item  = db.Blogs.FirstOrDefault(x => x.BlogID == id);
+            var item = db.Blogs.FirstOrDefault(x => x.BlogID == id);
 
-            if(item is null)
+            if (item is null)
             {
                 Console.WriteLine("No Data Found!!!");
                 return;
@@ -69,7 +70,7 @@ namespace TTADotNetCore.ConsoleApp
         {
             var item = db.Blogs.FirstOrDefault(data => data.BlogID == id);
 
-            if(item is null)
+            if (item is null)
             {
                 Console.WriteLine("No Data Found!!");
                 return;

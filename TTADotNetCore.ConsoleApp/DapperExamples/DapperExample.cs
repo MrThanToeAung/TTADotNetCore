@@ -8,12 +8,15 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using TTADotNetCore.ConsoleApp.Dtos;
+using TTADotNetCore.ConsoleApp.Services;
 
-namespace TTADotNetCore.ConsoleApp
+namespace TTADotNetCore.ConsoleApp.DapperExamples
 {
     internal class DapperExample
     {
-        public void Run() {
+        public void Run()
+        {
             //Read();
             //Edit(1);
             //Edit(11);
@@ -32,7 +35,7 @@ namespace TTADotNetCore.ConsoleApp
             using IDbConnection dbConnection = new SqlConnection(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
             List<BlogDto> datalist = dbConnection.Query<BlogDto>("SELECT * FROM Tbl_Blog").ToList();
 
-            foreach ( BlogDto item in datalist)
+            foreach (BlogDto item in datalist)
             {
                 Console.WriteLine(item.BlogID);
                 Console.WriteLine(item.BlogTitle);
@@ -45,9 +48,9 @@ namespace TTADotNetCore.ConsoleApp
         private void Edit(int id)
         {
             using IDbConnection dbConnection = new SqlConnection(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
-            var item = dbConnection.Query<BlogDto>("SELECT * FROM Tbl_Blog WHERE BlogId = @BlogId ", new BlogDto { BlogID = id}).FirstOrDefault();
+            var item = dbConnection.Query<BlogDto>("SELECT * FROM Tbl_Blog WHERE BlogId = @BlogId ", new BlogDto { BlogID = id }).FirstOrDefault();
 
-            if(item is null)
+            if (item is null)
             {
                 Console.WriteLine("No Data Found");
                 return;
@@ -61,7 +64,7 @@ namespace TTADotNetCore.ConsoleApp
         }
 
         private void Create(string title, string author, string content)
-        {            
+        {
             var item = new BlogDto
             {
                 BlogTitle = title,
@@ -88,11 +91,11 @@ namespace TTADotNetCore.ConsoleApp
         private void Update(int id, string title, string author, string content)
         {
             var item = new BlogDto
-            { 
-                 BlogID = id,
-                 BlogTitle = title,
-                 BlogAuthor = author,
-                 BlogContent = content            
+            {
+                BlogID = id,
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content
             };
 
             string query = @"UPDATE [dbo].[Tbl_Blog]

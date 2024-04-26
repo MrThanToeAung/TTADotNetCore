@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TTADotNetCore.ConsoleApp
+namespace TTADotNetCore.ConsoleApp.AdoDotNetExamples
 {
     internal class AdoDotNetExample
     {
@@ -60,11 +60,11 @@ namespace TTADotNetCore.ConsoleApp
 		                       @BlogContent)";
 
             SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@BlogTitle",title);
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
             cmd.Parameters.AddWithValue("@BlogAuthor", author);
-            cmd.Parameters.AddWithValue("@BlogContent",content);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
             int result = cmd.ExecuteNonQuery();
-            
+
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
 
             connection.Close();
@@ -73,7 +73,7 @@ namespace TTADotNetCore.ConsoleApp
 
         }
 
-        public void Update(int id, string title , string author, string content)
+        public void Update(int id, string title, string author, string content)
         {
             SqlConnection sqlConnection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             sqlConnection.Open();
@@ -83,7 +83,7 @@ namespace TTADotNetCore.ConsoleApp
                               ,[BlogContent] = @BlogContent
                          WHERE BlogID = @BlogID";
 
-            SqlCommand cmd = new SqlCommand(query,sqlConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@BlogID", id);
             cmd.Parameters.AddWithValue("@BlogTitle", title);
             cmd.Parameters.AddWithValue("@BlogAuthor", author);
@@ -107,7 +107,7 @@ namespace TTADotNetCore.ConsoleApp
             int result = sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
             string message = result > 0 ? "Delete Successfully" : "Deleting Failde";
-            Console.WriteLine (message);
+            Console.WriteLine(message);
 
         }
 
@@ -124,7 +124,7 @@ namespace TTADotNetCore.ConsoleApp
 
             connection.Close();
 
-            if(dt.Rows.Count == 0)
+            if (dt.Rows.Count == 0)
             {
                 Console.WriteLine("No Data Found");
                 return;
