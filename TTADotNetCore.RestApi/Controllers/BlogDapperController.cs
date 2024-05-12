@@ -66,6 +66,7 @@ namespace TTADotNetCore.RestApi.Controllers
                 return NotFound("No Data Found");
             }
 
+            blog.BlogID = id;
             string query = @"UPDATE [dbo].[Tbl_Blog]
                            SET [BlogTitle] = @BlogTitle
                               ,[BlogAuthor] = @BlogAuthor
@@ -86,35 +87,37 @@ namespace TTADotNetCore.RestApi.Controllers
             {
                 return NotFound("No Data Found!");
             }
-            string conditons = string.Empty;
+            string conditions = string.Empty;
             if (!string.IsNullOrEmpty(blog.BlogTitle))
             {
-                conditons += "[BlogTitle] = @BlogTitle, ";
+                conditions += "[BlogTitle] = @BlogTitle, ";
             }
             if (!string.IsNullOrEmpty(blog.BlogAuthor))
             {
-                conditons += "[BlogAuthor] = @BlogAuthor, ";
+                conditions += "[BlogAuthor] = @BlogAuthor, ";
             }
             if (!string.IsNullOrEmpty(blog.BlogContent))
             {
-                conditons += "[BlogContent] = @BlogContent, ";
+                conditions += "[BlogContent] = @BlogContent, ";
             }
 
-            conditons.Substring(0,conditons.Length - 2);
-            blog.BlogID = id;
-            if(conditons.Length > 0)
+            if(conditions.Length == 0)
             {
                 return NotFound("No Data To Update!!");
             }
 
+            conditions = conditions.Substring(0, conditions.Length - 2);
+            blog.BlogID = id;
+
             string query = $@"UPDATE [dbo].[Tbl_Blog]
-                           SET {conditons}
+                           SET {conditions}
                            WHERE BlogID = @BlogID";
 
             using IDbConnection dbConnection = new SqlConnection(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
             var result = dbConnection.Execute(query, blog);
+            string message = result > 0 ? "Updating Successful." : "Updating Failed.";
 
-            return Ok();
+            return Ok(message);
         }
 
         [HttpDelete("{id}")]

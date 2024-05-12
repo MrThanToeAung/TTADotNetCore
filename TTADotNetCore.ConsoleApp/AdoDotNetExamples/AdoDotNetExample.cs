@@ -65,8 +65,6 @@ namespace TTADotNetCore.ConsoleApp.AdoDotNetExamples
             cmd.Parameters.AddWithValue("@BlogContent", content);
             int result = cmd.ExecuteNonQuery();
 
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-
             connection.Close();
             string message = result > 0 ? "Saving Successfully" : "Saving Failed";
             Console.WriteLine(message);
@@ -106,9 +104,8 @@ namespace TTADotNetCore.ConsoleApp.AdoDotNetExamples
             sqlCommand.Parameters.AddWithValue("@BlogID", blogId);
             int result = sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
-            string message = result > 0 ? "Delete Successfully" : "Deleting Failde";
+            string message = result > 0 ? "Delete Successfully" : "Deleting Failed";
             Console.WriteLine(message);
-
         }
 
         public void Edit(int id)
