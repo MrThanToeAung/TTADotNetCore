@@ -33,7 +33,7 @@ namespace TTADotNetCore.Shared
         public T QueryFirstOrDefault<T>(string query, object? param = null)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
-            var item = db.Query(query, param).FirstOrDefault();
+            var item = db.Query<T>(query, param).FirstOrDefault();
             return item;
         }
 
