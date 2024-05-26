@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TTADotNetCore.RestApi.Controllers;
 using TTADotNetCore.RestApi.Models;
 
 namespace TTADotNetCore.RestApi.Database

@@ -1,12 +1,8 @@
 ﻿using Dapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using TTADotNetCore.RestApi.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TTADotNetCore.RestApi.Controllers
 {
@@ -32,14 +28,14 @@ namespace TTADotNetCore.RestApi.Controllers
             //using IDbConnection db = new SqlConnection(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
             //var item = db.Query<BlogModel>(query, new BlogModel { BlogID = id}).FirstOrDefault(); 
             var item = FindByID(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found!!!");
             }
             return Ok(item);
         }
 
-    [HttpPost]
+        [HttpPost]
         private IActionResult CreateBlog(BlogModel blog)
         {
             string query = @"INSERT INTO [dbo].[Tbl_Blog]
@@ -61,7 +57,7 @@ namespace TTADotNetCore.RestApi.Controllers
         private IActionResult UpdateBlog(int id, BlogModel blog)
         {
             var item = FindByID(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found");
             }
@@ -83,7 +79,7 @@ namespace TTADotNetCore.RestApi.Controllers
         private IActionResult PatchBlog(int id, BlogModel blog)
         {
             var item = FindByID(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found!");
             }
@@ -101,7 +97,7 @@ namespace TTADotNetCore.RestApi.Controllers
                 conditions += "[BlogContent] = @BlogContent, ";
             }
 
-            if(conditions.Length == 0)
+            if (conditions.Length == 0)
             {
                 return NotFound("No Data To Update!!");
             }
@@ -130,7 +126,7 @@ namespace TTADotNetCore.RestApi.Controllers
             }
             string query = "DELETE FROM tbl_blog WHERE BlogID = @BlogID";
             using IDbConnection db = new SqlConnection(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
-            var result = db.Execute(query, new BlogModel { BlogID = id});
+            var result = db.Execute(query, new BlogModel { BlogID = id });
             string message = result > 0 ? "Delete Successfully" : "Deleting Failed";
             return Ok(message);
         }

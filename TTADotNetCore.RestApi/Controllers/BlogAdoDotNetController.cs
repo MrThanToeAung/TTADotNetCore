@@ -1,11 +1,7 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
 using TTADotNetCore.RestApi.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TTADotNetCore.RestApi.Controllers
 {
@@ -19,7 +15,7 @@ namespace TTADotNetCore.RestApi.Controllers
             string query = "SELECT * FROM tbl_blog";
             SqlConnection connection = new SqlConnection(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
             connection.Open();
-            
+
             SqlCommand cmd = new SqlCommand(query, connection);
             SqlDataAdapter sqlDataAdapters = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -80,7 +76,7 @@ namespace TTADotNetCore.RestApi.Controllers
                 BlogTitle = Convert.ToString(dr["BlogTitle"]),
                 BlogAuthor = Convert.ToString(dr["BlogAuthor"]),
                 BlogContent = Convert.ToString(dr["BlogContent"])
-            };            
+            };
             return Ok(item);
         }
 
@@ -182,7 +178,8 @@ namespace TTADotNetCore.RestApi.Controllers
             {
                 cmd.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
             }
-            if (!string.IsNullOrEmpty(blog.BlogAuthor)){
+            if (!string.IsNullOrEmpty(blog.BlogAuthor))
+            {
                 cmd.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
             }
             if (!string.IsNullOrEmpty(blog.BlogContent))
@@ -200,7 +197,7 @@ namespace TTADotNetCore.RestApi.Controllers
         public IActionResult DeleteBlog(int id)
         {
             var item = GetBlog(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found");
             }
@@ -210,7 +207,7 @@ namespace TTADotNetCore.RestApi.Controllers
             sqlConnection.Open();
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@BlogId", id);
-            var result = cmd .ExecuteNonQuery();
+            var result = cmd.ExecuteNonQuery();
             sqlConnection.Close();
             string message = result > 0 ? "Delete Successfully" : "Deleting Failed";
             return Ok(message);

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Cryptography.X509Certificates;
 
 namespace TTADotNetCore.Shared
 {
@@ -26,7 +25,7 @@ namespace TTADotNetCore.Shared
             //    var list = db.Query<T>(query).ToList();
             //}
 
-            var list =db.Query<T>(query, param).ToList();
+            var list = db.Query<T>(query, param).ToList();
             return list;
         }
 

@@ -1,13 +1,6 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
 using TTADotNetCore.RestApi.Models;
 using TTADotNetCore.Shared;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TTADotNetCore.RestApi.Controllers
 {
@@ -30,7 +23,7 @@ namespace TTADotNetCore.RestApi.Controllers
         private IActionResult GetBlog(int id)
         {
             var item = FindByID(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found!!!");
             }
@@ -58,7 +51,7 @@ namespace TTADotNetCore.RestApi.Controllers
         private IActionResult UpdateBlog(int id, BlogModel blog)
         {
             var item = FindByID(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found");
             }
@@ -70,7 +63,7 @@ namespace TTADotNetCore.RestApi.Controllers
                               ,[BlogContent] = @BlogContent
                          WHERE BlogID = @BlogID";
 
-            
+
             int result = _dapperService.Execute(query, blog);
             string message = result > 0 ? "Update Successfully" : "Updating Failed";
             return Ok(message);
@@ -80,7 +73,7 @@ namespace TTADotNetCore.RestApi.Controllers
         private IActionResult PatchBlog(int id, BlogModel blog)
         {
             var item = FindByID(id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound("No Data Found!");
             }
@@ -98,7 +91,7 @@ namespace TTADotNetCore.RestApi.Controllers
                 conditions += "[BlogContent] = @BlogContent, ";
             }
 
-            if(conditions.Length == 0)
+            if (conditions.Length == 0)
             {
                 return NotFound("No Data To Update!!");
             }
@@ -125,7 +118,7 @@ namespace TTADotNetCore.RestApi.Controllers
                 return NotFound("No Data Found");
             }
             string query = "DELETE FROM tbl_blog WHERE BlogID = @BlogID";
-            var result = _dapperService.Execute(query, new BlogModel { BlogID = id});
+            var result = _dapperService.Execute(query, new BlogModel { BlogID = id });
             string message = result > 0 ? "Delete Successfully" : "Deleting Failed";
             return Ok(message);
         }

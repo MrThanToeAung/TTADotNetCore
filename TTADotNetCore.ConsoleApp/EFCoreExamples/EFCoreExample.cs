@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TTADotNetCore.ConsoleApp.Dtos;
+﻿using TTADotNetCore.ConsoleApp.Dtos;
 
 namespace TTADotNetCore.ConsoleApp.EFCoreExamples
 {
@@ -99,10 +94,6 @@ namespace TTADotNetCore.ConsoleApp.EFCoreExamples
             int result = db.SaveChanges();
             string message = result > 0 ? "Deleting Successfully" : "Deleting Failed";
             Console.WriteLine(message);
-
         }
-
-
-
     }
 }

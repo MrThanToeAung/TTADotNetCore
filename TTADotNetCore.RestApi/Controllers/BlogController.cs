@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TTADotNetCore.RestApi.Database;
 using TTADotNetCore.RestApi.Models;
 
@@ -22,17 +21,17 @@ namespace TTADotNetCore.RestApi.Controllers
         public IActionResult Read()
         {
             var dataList = _context.Blogs.ToList();
-            
-            return Ok(dataList);    
+
+            return Ok(dataList);
         }
 
         [HttpGet("{id}")]
         public IActionResult Edit(int id)
         {
-            var item = _context.Blogs.FirstOrDefault(x=> x.BlogID == id);
-            if(item is null)
+            var item = _context.Blogs.FirstOrDefault(x => x.BlogID == id);
+            if (item is null)
             {
-                return NotFound( "No Data Found !!");
+                return NotFound("No Data Found !!");
             }
             return Ok(item);
         }
@@ -42,15 +41,15 @@ namespace TTADotNetCore.RestApi.Controllers
         {
             _context.Blogs.Add(blogModel);
             var result = _context.SaveChanges();
-            string message = result > 0 ? "Save Successfully" : "Saving Failed";            
+            string message = result > 0 ? "Save Successfully" : "Saving Failed";
             return Ok(message);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, BlogModel blog)
         {
-            var item = _context.Blogs.FirstOrDefault(x=> x.BlogID == id);
-            if(item is null)
+            var item = _context.Blogs.FirstOrDefault(x => x.BlogID == id);
+            if (item is null)
             {
                 return NotFound("No data Found!!");
             }
@@ -72,15 +71,15 @@ namespace TTADotNetCore.RestApi.Controllers
                 return NotFound("No data Found!!");
             }
 
-            if(!string.IsNullOrEmpty(blog.BlogTitle))
+            if (!string.IsNullOrEmpty(blog.BlogTitle))
             {
                 item.BlogTitle = blog.BlogTitle;
             }
-            if(!string.IsNullOrEmpty(blog.BlogAuthor))
+            if (!string.IsNullOrEmpty(blog.BlogAuthor))
             {
                 item.BlogAuthor = blog.BlogAuthor;
             }
-            if(!string.IsNullOrEmpty(blog.BlogContent))
+            if (!string.IsNullOrEmpty(blog.BlogContent))
             {
                 item.BlogContent = blog.BlogContent;
             }

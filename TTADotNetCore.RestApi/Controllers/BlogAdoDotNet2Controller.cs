@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
 using TTADotNetCore.RestApi.Models;
 using TTADotNetCore.Shared;
 
@@ -7,7 +6,7 @@ namespace TTADotNetCore.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogAdoDotNet2Controller: ControllerBase
+    public class BlogAdoDotNet2Controller : ControllerBase
     {
         private readonly AdoDotNetService _adoDotNetService = new AdoDotNetService(ConnectionStrings.SqlConnectionStringBuilder.ConnectionString);
         [HttpGet]
@@ -43,7 +42,7 @@ namespace TTADotNetCore.RestApi.Controllers
             {
                 return NotFound("No Data Found");
             }
-            
+
             return Ok(item);
         }
 

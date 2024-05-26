@@ -16,7 +16,6 @@ namespace TTADotNetCore.ConsoleAppRestClientExamples
             //await EditAsync(100);
             //await CreateAsync("TTA", "TTA", "TTA");
             //await PutAsync(1,"TTA", "TTA", "TTA");
-
         }
 
         private async Task ReadAsync()

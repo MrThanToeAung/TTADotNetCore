@@ -18,7 +18,7 @@ namespace TTADotNetCore.Shared
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             SqlCommand cmd = new SqlCommand(query, connection);
-            if(parameters is not null && parameters.Length > 0)
+            if (parameters is not null && parameters.Length > 0)
             {
                 //foreach(var item in parameters)
                 //{
@@ -76,7 +76,7 @@ namespace TTADotNetCore.Shared
             SqlCommand cmd = new SqlCommand(query, connection);
             if (parameters is not null && parameters.Length > 0)
             {
-                cmd.Parameters.AddRange(parameters.Select(item => new SqlParameter(item.Name,item.Value)).ToArray());
+                cmd.Parameters.AddRange(parameters.Select(item => new SqlParameter(item.Name, item.Value)).ToArray());
             }
             var result = cmd.ExecuteNonQuery();
             connection.Close();
@@ -94,7 +94,7 @@ namespace TTADotNetCore.Shared
             Value = value;
         }
         public string? Name { get; set; }
-        public object? Value { get; set; }   
+        public object? Value { get; set; }
     }
 
 }

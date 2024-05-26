@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using TTADotNetCore.ConsoleAppRestClientExamples;
+﻿using TTADotNetCore.ConsoleAppRestClientExamples;
 
 Console.WriteLine("Hello, World!");
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace TTADotNetCore.RestApiWithNLayer.Features.Blog
 {
@@ -60,7 +58,7 @@ namespace TTADotNetCore.RestApiWithNLayer.Features.Blog
 
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, BlogModel blog)
-        { 
+        {
             var result = _bl_Blog.PatchBlog(id, blog);
 
             string message = result > 0 ? "Update Successfully" : "Updating Failed";
